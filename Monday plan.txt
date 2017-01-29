@@ -5,4 +5,25 @@ Monday plans for coding:
  - add to my CSGO chat bots.
 
  - Maybe setup a script which asks whether people want jokes, riddles, a story or someones profile skimmed. 
+  
+ - add to main script, functions which will write a message explaining how I scraped their profile and proving I wrote the code, then referring them to my github
  
+ - function to print out definition of skid / script kiddie and reasons I don’t come under that name.
+
+ - function to auto write some terminology and ask person to explain it. 
+
+ - fake program to pretend I have wallhacks, aimbot etc:
+
+csgo.api(loadWallhacks);
+csgo.api(loadAimBot);
+csgo.api(loadSpinBot);
+
+import aimware;
+ambit = True;
+wallHacks = True;
+
+if cunt.getSalty(){
+	spinbot = True;
+	wallbangWaim = True;
+}
+

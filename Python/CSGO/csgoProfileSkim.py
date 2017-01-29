@@ -142,7 +142,7 @@ def profileInfo():
 
 		c('Steam Name: ' + name)
 		c('users friends: ')
-		all()
+		ten()
 
 		c('TOR torch search engine results for steam user: ' + name)
 		c('December 2016 steam database leak. Search results for username: ' + name)
