@@ -1,0 +1,70 @@
+#!/bin/bash
+cd Project
+
+cp /dev/null grabbed
+cp /dev/null tmpWPA2
+cp /dev/null WPA2
+cp /dev/null channel
+cp /dev/null essid
+
+/root/./monitormode
+/root/./monitormode
+
+wifi_scan() {
+(airodump-ng wlan0 > grabbed 2>&1 | more) & pid=$!
+(sleep 10 && kill -HUP $pid) 2>/dev/null & watcher=$1
+wait $pid 2>/dev/null && pkill -HUP -P $watcher
+
+
+tail -n 50 grabbed | grep WPA2 | sort | uniq > tmpWPA2
+cat tmpWPA2 | awk -F ' ' '{print $1}' > WPA2
+cat tmpWPA2 | awk -F ' ' '{print $6}' > channel
+cat tmpWPA2 | awk -F ' ' '{print $11}' > essid
+
+RAND=$'\n' read -d ' ' -r -a MAC < WPA2
+RAND2=$'\n' read -d ' ' -r -a CH < channel
+RAND3=$'\n' read -d ' ' -r -a NAME < essid
+
+
+x=1
+y=0
+
+for i in "${MAC[@]}"
+do 
+	echo "$x.	$i     c  ${CH[y]}   ${NAME[y]}"
+	y=$((y+1))
+	x=$((x+1))
+done
+}
+
+echo -n "Select Option:
+	1. Scan WPA2 wifis.
+	2. Scan WEP wifis.
+	3. Crack with wordlist.
+	4. Crack with crunch."
+	echo
+	echo
+read int
+
+if ((int == 1)); then
+	echo "WPA2 wifis found:"
+	echo 
+	wifi_scan
+
+elif ((int == 2)); then
+	echo "WEP wifis found:"
+	echo 
+
+elif ((int == 3)); then
+	echo "Aircrack with wordlist: select wordlist"
+	echo
+
+elif ((int == 4)); then
+	echo "Aircrack with Crunch"
+	echo
+
+else 
+	echo "Invalid option"
+
+fi
+cd
