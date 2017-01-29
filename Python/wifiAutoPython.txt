@@ -1,0 +1,62 @@
+#!/usr/bin/python
+
+import sys
+import re
+import os
+
+os.popen('./monitormode')
+os.popen('touch Desktop/Scans/wifis_found.txt')
+os.popen('touch Desktop/Scans/handshake_captured')
+os.popen('touch Desktop/Scans/failed')
+save_file = open('Desktop/Scans/wifis_found.txt')
+
+for line in os.popen('airodump-ng wlan0 & pid=$! \n(sleep 10 && kill -HUP $pid) 2>/dev/null & watcher=$1 \nwait $pid 2>/dev/null && pkill -HUP -P $watcher'):
+       save_file.writelines(line)
+save_file.close()
+
+os.popen('cat Desktop/Scans/wifis_found.txt | grep WPA2 | sort | uniq 2>&1 Desktop/Scans/wifi_uniq.txt')
+
+ch = 10
+name = 15
+
+
+
+test_file = 'Desktop/Scans/wifi_uniq.txt'
+
+char_count = []
+wifis = []
+mac_addresses = []
+x = 0
+essid = 'has not worked'
+wpa = ''
+
+open_file = open(test_file)
+contents = open_file.readlines()
+for line in contents:
+    if 'WPA2' in line:
+            wifis.insert(x, line[1:])
+            x += 1
+    elif 'WPA' in line:
+        wpa.insert(x, line[1:])
+
+open_file.close()
+
+#essid = wifis[0].split(' ', 1)[0]
+
+
+for i in range(len(wifis)):
+    mac_addresses.insert(i, wifis[i].partition('  ')[0])
+
+for i, c in enumerate(wifis):	#removed [0] from after wifis
+    char_count.append(c)
+
+all_info = [[[] for i in range(16)] for i in range(len(wifis))]
+
+for i in range(len(wifis)):
+    all_info[i] = re.sub("[^\w]", " ", wifis[i]).split()
+
+wordlist = re.sub("[^\w]", " ", wifis).split()	# removed [0] from after wifis
+
+
+for i in range(len(mac_addresses)):
+    print(mac_addresses[i] + '  ch ' + all_info[i][ch] + '  ' + all_info[i][name])
