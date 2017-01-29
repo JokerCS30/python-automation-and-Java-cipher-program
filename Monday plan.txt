@@ -1,0 +1,8 @@
+Monday plans for coding:
+
+ - integrate scripts into one big one where it prompts me on which one I want to run, so I press one macro button and it gives me all the scripts to run.
+
+ - add to my CSGO chat bots.
+
+ - Maybe setup a script which asks whether people want jokes, riddles, a story or someones profile skimmed. 
+ 
