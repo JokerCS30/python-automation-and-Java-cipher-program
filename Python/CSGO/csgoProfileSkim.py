@@ -153,7 +153,7 @@ def profileInfo():
 
 	except KeyboardInterrupt:
 	    print('done')
-	
+
 
 def lobbied():
 	urlArray = []
@@ -265,4 +265,4 @@ if script == 'profile':
 else if script == 'lobbied':
 	lobbied()
 else if script == 'fake':
-	
+    print('fake')
