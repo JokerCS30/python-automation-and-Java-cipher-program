@@ -2,7 +2,7 @@ import pyautogui, time, pyperclip
 from random import shuffle
 import webbrowser, sys, pyperclip, requests, bs4, re, time, getopt
 
-steamURL = 'http://steamcommunity.com/id/compowchicken'
+steamURL = 'http://steamcommunity.com/id/somesteamusersid'
 
 res = requests.get(steamURL)
 res.raise_for_status()
