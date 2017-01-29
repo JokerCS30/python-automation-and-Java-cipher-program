@@ -1,0 +1,14 @@
+this java program is to perform conversions between Decimal, Binary, Hexadecimal, Ascii and the alphabet.
+
+I've only contained the java files so noone easily runs the whole program and solves my puzzles quickly.
+
+It also performs Ceasar shifts using all 26 rotation numbers, a number specified or a rotation word specified. 
+The reverse word function is to cipher a message so the real word can decipher it. Eg. joker is the word to decipher / rotate the text
+therefore to cipher the text the inverse word of joker is required. 
+has a scramble word feature to randomise order of letters in word
+Has a word and letter count.
+Doesn't have the functionality to perform a dictionary check to see wether a word is a real english word as would require using some
+webapplications api to do it. 
+
+I plan to update this program alot and my next task with it is removing the buttons for converting formats and replace with radio button
+groups to take up a lot less space. 
