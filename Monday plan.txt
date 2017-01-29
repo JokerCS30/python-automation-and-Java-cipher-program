@@ -27,3 +27,10 @@ if cunt.getSalty(){
 	wallbangWaim = True;
 }
 
+
+if steamUser.isSalty():
+	autoBuy.Negev
+	hacks(spin, aim, walls).On
+	user.stealInventory
+	user.StealTheirlollies
+	user.batheInTheirTears
