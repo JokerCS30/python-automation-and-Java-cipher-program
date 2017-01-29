@@ -147,16 +147,8 @@ try:
 
 
         def ten():
-            c(re.sub("\n.*", "", elemsFriends[0].getText().strip()))
-            c(re.sub("\n.*", "", elemsFriends[1].getText().strip()))
-            c(re.sub("\n.*", "", elemsFriends[2].getText().strip()))
-            c(re.sub("\n.*", "", elemsFriends[3].getText().strip()))
-            c(re.sub("\n.*", "", elemsFriends[4].getText().strip()))
-            c(re.sub("\n.*", "", elemsFriends[5].getText().strip()))
-            c(re.sub("\n.*", "", elemsFriends[6].getText().strip()))
-            c(re.sub("\n.*", "", elemsFriends[7].getText().strip()))
-            c(re.sub("\n.*", "", elemsFriends[8].getText().strip()))
-            c(re.sub("\n.*", "", elemsFriends[9].getText().strip()))
+            for l in range(10):
+		c(re.sub("\n.*", "", elemsFriends[l].getText().strip()))
 
         def all():
             for j in range(len(elemsFriends)):
@@ -171,27 +163,7 @@ try:
         c('Results = one. please subscribe to our services for the raw data.')
         c('href=\'trz899adafzf900af0.onion\'')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         break
-
-
-
-        #for j in range(10):
-            #loopText(re.sub("\n.*", "", elemsFriends[j].getText().strip()), 0)
-
 
 except KeyboardInterrupt:
     print('done')
