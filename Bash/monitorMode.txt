@@ -1,0 +1,25 @@
+#!/bin/bash
+
+cp /dev/null mon.txt
+cp /dev/null mon2.txt
+
+ifconfig wlan0 down
+macchanger wlan0 -r
+iwconfig wlan0 mode monitor
+ifconfig wlan0 up
+
+airmon-ng check wlan0 > mon.txt
+
+sed '1,6d' mon.txt > mon2.txt
+cat mon2.txt | awk -F ' ' '{print $1}' > mon.txt
+cat mon.txt
+
+IFS=$'\n' read -d ' ' -r -a PID < mon.txt
+
+echo "${PID[@]}"
+
+for i in "${PID[@]}"
+do
+	kill $i
+done
+
