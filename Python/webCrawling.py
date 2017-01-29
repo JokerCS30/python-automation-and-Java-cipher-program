@@ -48,7 +48,7 @@ def stuffNZ():
     res2.raise_for_status()
     stuff = bs4.BeautifulSoup(res2.text, "html.parser")
     articles = ''
-    words = ['wellington', 'Wellington', 'Miramar', 'miramar', 'hacker', 'hacking', 'shark', 'Shark', 'technology', 'Technology']
+    words = ['hacker', 'hacking', 'shark', 'Shark', 'technology', 'Technology']
     reading = ''
     urls = []
 
