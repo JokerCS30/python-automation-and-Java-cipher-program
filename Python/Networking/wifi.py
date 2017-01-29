@@ -19,7 +19,7 @@ name = 15
 
 
 
-test_file = '/Users/Jamie/Desktop/challenges/wifi.txt'
+test_file = '/Users/NAME/Desktop/challenges/wifi.txt'
 
 char_count = []
 wifis = []
