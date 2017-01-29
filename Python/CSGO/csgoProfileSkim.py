@@ -106,56 +106,51 @@ def c(writing):
     ReleaseKey(0x0D)
     time.sleep(0.3)
 
+def profileInfo():
+	try:
+	    while True:
+		default = 0.1
+		steamURL = pyperclip.paste()
+		#steamURL = pyautogui.prompt('enter steam url')
 
-try:
-    while True:
-        default = 0.1
-        #name = pyperclip.paste()
-        steamURL = pyperclip.paste()
-        #steamURL = pyautogui.prompt('enter steam url')
-        hexArray = ['10', '18', '0E', '09', '13', '05', '0A', '16', '14', '02', '0A', '01']
-
-
-
-        res = requests.get(steamURL)
-        res.raise_for_status()
-        userProfile = bs4.BeautifulSoup(res.text, "html.parser")
+		res = requests.get(steamURL)
+		res.raise_for_status()
+		userProfile = bs4.BeautifulSoup(res.text, "html.parser")
 
 
-        resFriends = requests.get(steamURL + '/friends')
-        userFriends = bs4.BeautifulSoup(resFriends.text, "html.parser")
-        usersName = userFriends.select('.whiteLink')
-        elemsFriends = userFriends.select('.friendBlockContent')
+		resFriends = requests.get(steamURL + '/friends')
+		userFriends = bs4.BeautifulSoup(resFriends.text, "html.parser")
+		usersName = userFriends.select('.whiteLink')
+		elemsFriends = userFriends.select('.friendBlockContent')
 
-        resGames = requests.get(steamURL + '/games/?tab=all')
-        userGames = bs4.BeautifulSoup(resGames.text, "html.parser")
-        elemGames = userGames.select('.gameListRow')
-        #mostPlayed = elemGames[0].getText().strip()
+		resGames = requests.get(steamURL + '/games/?tab=all')
+		userGames = bs4.BeautifulSoup(resGames.text, "html.parser")
+		elemGames = userGames.select('.gameListRow')
 
-        user = userProfile.select('.actual_persona_name')
-        name = user[0].getText().strip()
+		user = userProfile.select('.actual_persona_name')
+		name = user[0].getText().strip()
 
 
-        def ten():
-            for l in range(10):
-		c(re.sub("\n.*", "", elemsFriends[l].getText().strip()))
+		def ten():
+		    for l in range(10):
+			c(re.sub("\n.*", "", elemsFriends[l].getText().strip()))
 
-        def all():
-            for j in range(len(elemsFriends)):
-                c(re.sub("\n.*", "", elemsFriends[j].getText().strip()))
+		def all():
+		    for j in range(len(elemsFriends)):
+			c(re.sub("\n.*", "", elemsFriends[j].getText().strip()))
 
-        c('Steam Name: ' + name)
-        c('users friends: ')
-        all()
+		c('Steam Name: ' + name)
+		c('users friends: ')
+		all()
 
-        c('TOR torch search engine results for steam user: ' + name)
-        c('December 2016 steam database leak. Search results for username: ' + name)
-        c('Results = one. please subscribe to our services for the raw data.')
-        c('href=\'trz899adafzf900af0.onion\'')
+		c('TOR torch search engine results for steam user: ' + name)
+		c('December 2016 steam database leak. Search results for username: ' + name)
+		c('Results = one. please subscribe to our services for the raw data.')
+		c('href=\'trz899adafzf900af0.onion\'')
 
-        break
+		break
 
-except KeyboardInterrupt:
-    print('done')
+	except KeyboardInterrupt:
+	    print('done')
 
 
