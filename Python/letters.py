@@ -9,7 +9,7 @@ subs = ['e', 't', 'a', 'o', 'i', 'n', 's', 'h', 'r', 'd', 'l', 'u', 'c', 'm', 'w
 common_words = []
 list_allWords = []
 
-test_file = '/Users/Jamie/Desktop/challenges/test.txt'
+test_file = '/Users/NAME/Desktop/challenges/test.txt'
 
 
 open_file = open(test_file)                 # this block of code reads the text from the text file and puts each word into list_allWords, each letter into letter_list
