@@ -107,16 +107,6 @@ def c(writing):
     time.sleep(0.3)
 
 
-
-
-def p(one, two):
-    pyautogui.click(one, two)
-    time.sleep(0.2)
-
-
-
-
-
 try:
     while True:
         default = 0.1
