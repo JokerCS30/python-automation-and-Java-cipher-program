@@ -193,7 +193,7 @@ def lobbied():
                     for k in range(len(nameArray)):
                         if ((re.sub("\n.*", "", elemsFriends[j].getText().strip())) == nameArray[k]):
                             friends += (re.sub("\n.*", "", elemsFriends[j].getText().strip()))
-                            friends += '   '
+                            friends += ';  '
 
             except:
                 print(name + '  private')
@@ -256,13 +256,201 @@ def profileSkim():
     except:
         print('error')
 
+def fakeInfo():
+    c('First Name: Jessica, Surname: Saprankieos')
+    c('Age: 12, IQ: 2 x Age')
+    c('Email address: Jessica@transgoths.com')
+    c('Mother: non existent')
+    c('Father: Melania')
+    c('Sisters: none')
+    c('Brothers: Ivanka, Tiffany')
+    c('Residency: 13th floor of anything')
+    c('School: St Francines Girls Boarding School')
+    c('IP addr: 1.2.3.4.5.6.7.8.9.0.abcdefghiv')
+    c('Now as you can see I have your real info')
+    c('please pay 5 btc to wwww.go.kl/asdo12 otherwise ')
+    c('I will anonymously riddle you until you cry')
+    c('I will have anonymous ddos you while I wear a hoodie')
+    c('I will download programs off the darkweb')
+    c('using TOR to steal your worm god skin(f.society)')
+    c('I will not forget, I will not forbid(CS30)')
+    c('I am Norwegian, inject mysql(Mr.Robot Abort)')
+
+def explain():
+    c('I don\'t do anything like copy and paste,')
+    c('it\'s simply an automation script')
+    c('using pythons beautiful soup module')
+    c('it webscrapes the html data off the steam url')
+    c('based on what element I pass')
+    c('for getting your friends names it is')
+    c('friends = requests.get(steamURL + \'/friends\')')
+    c('userFriends = bs4.BeautifulSoup(friends.text, "html.parser")')
+    c('elemsFriends = userFriends.select(\'.friendBlockContent\')')
+    c('then for only printing the first ten:')
+    c('for x in range(10):')
+    c('       looptext(elemsFriends[x].getText().strip())')
+    c('I also write a regex to take away the extra info')
+    c('in the element of the friend like what game they\'re in')
+    c('or last online at blah blah etc')
+    c('that only explains a few lines of the script ')
+    c('however I could walk you through the whole thing')
+    c('if you really want to claim I didn\'t code it ')
+    c('check out my github to see my code with proof I wrote it')
+    c('https://github.com/ClownPrinceCS30/python-automation-and-Java-cipher-program')
+
+def fakeHacks():
+    c('if steamUser.isSalty():')
+    c('    autoBuy.Negev')
+    c('    hacks(spin, aim, walls).ON')
+    c('    user.stealInventory')
+    c('    user.stealTheirLollies')
+    c('    user.batheInTheirTears')
+
+def fakeIPs():
+    urlArray = []
+
+    def copy(two):
+        PressKey(0x09)
+        time.sleep(0.3)
+        pyautogui.click(629, two, button='right')
+        pyautogui.click(629, two)
+        pyautogui.click(710, two + 38)  # click steam profile
+
+        time.sleep(2.5)
+        ReleaseKey(0x09)
+        pyautogui.click(637, 231, button='right')  # right click
+        pyautogui.click(741, 356)  # copy url
+        time.sleep(0.5)
+        urlArray.append(pyperclip.paste())
+        pyautogui.click(1907, 16)  # exit page
+        pyautogui.press('esc')  # escape
+        time.sleep(0.5)
+
+    pyautogui.click(960, 540, button='right')
+
+    def top():
+        copy(367)
+        copy(407)
+        copy(440)
+        copy(470)
+        copy(500)
+
+    def bottom():
+        copy(619)
+        copy(657)
+        copy(695)
+        copy(725)
+        copy(755)
+
+    if pyautogui.prompt('top or bottom team?') == 'top':
+        top()
+    else:
+        bottom()
 
 
-option = pyautogui.prompt('1: profileSkim, 2: lobbyInfo')
+
+
+    try:
+
+        default = 0.1
+        steamURL = pyperclip.paste()
+        ipArray = ['253.126.205.151', '162.79.118.210', '83.249.150.53', '219.219.90.85', '248.88.176.70']
+        nameArray = []
+
+        for x in range(len(urlArray)):
+            res = requests.get(urlArray[x])
+            res.raise_for_status()
+            userProfile = bs4.BeautifulSoup(res.text, "html.parser")
+            user = userProfile.select('.actual_persona_name')
+            name = user[0].getText().strip()
+            nameArray.append(name)
+
+        for z in range(len(urlArray)):
+            res = requests.get(urlArray[z])
+            res.raise_for_status()
+            userProfile = bs4.BeautifulSoup(res.text, "html.parser")
+            friends = ''
+
+            resFriends = requests.get(urlArray[z] + '/friends')
+            userFriends = bs4.BeautifulSoup(resFriends.text, "html.parser")
+            usersName = userFriends.select('.whiteLink')
+            elemsFriends = userFriends.select('.friendBlockContent')
+
+            user = userProfile.select('.actual_persona_name')
+            name = user[0].getText().strip()
+
+
+
+        for j in range(len(nameArray)):
+            c(nameArray[j].center(30) + ipArray[j].center(30))
+
+
+
+
+
+    except:
+        print ('error')
+
+def metasploit():
+    c('NIC.macchanger -r')
+    c('NIC.monitormode')
+    c('service mysql start')
+    c('msfconsole')
+    c('setg RPORT = 5543')
+    c('setg RHOST = 152.213.14.154')
+    c('use Unix/authenticateUser/auxillary/scanner')
+    c('set Threads = 5')
+    c('run')
+    c('.')
+    c('.')
+    c('results = ack packets sent to port 8080')
+    c('use Unix/TCPserver/handler')
+    c('set Threads = 5')
+    c('run -vv')
+    c('initialising reverse TCP handler')
+    c('listening on port 8080 for TCP client')
+    c('msfvenom unix/shell_bind_tcp EXITFUNC=seh LPORT=5543')
+    c('sending payload through TCP')
+    c('.')
+    c('.')
+    c('.')
+    c('connection on port 5543 established')
+    c('setting up reverse shell')
+    c('killing reverse TCP handler on port 8080; no results')
+    c('reverse shell initialised use -h for commands')
+    c('-->')
+    c('skins = game.Players(inv)')
+    c('cd ..')
+    c('->')
+    c('ls')
+    c('. .. backup logs routing serverSource anti-cheat lastLog.txt')
+    c('cd routing')
+    c('ls')
+    c('. .. routingTableLog.txt dhcp.info dns.info')
+    c('cat routingTableLog.txt')
+    c('salt.salt.salt.salt.salt.salt.salt')
+
+def github():
+    c('https://github.com/ClownPrinceCS30/python-automation-and-Java-cipher-program')
+
+
+option = pyautogui.prompt('1: profileSkim, 2: lobbyInfo, 3: fakeInfo, 4: explain webscraper, 5: fakeHacks, 6: fake ipAddr, 7: metasploit, 8: github link')
 
 if(option == '1'):
     profileSkim()
 elif (option == '2'):
     lobbied()
+elif (option == '3'):
+    fakeInfo()
+elif (option == '4'):
+    explain()
+elif (option == '5'):
+    fakeHacks()
+elif (option == '6'):
+    fakeIPs()
+elif (option == '7'):
+    metasploit()
+elif (option == '8'):
+    github()
 else:
     print('nothing chosen')
