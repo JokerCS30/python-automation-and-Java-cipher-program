@@ -1,6 +1,6 @@
 import ctypes, pyautogui
 from ctypes import wintypes
-import time, pyperclip
+import time, pyperclip, random
 from random import shuffle
 import webbrowser, sys, pyperclip, requests, bs4, re, getopt
 
@@ -119,7 +119,6 @@ def lobbied():
         pyautogui.click(629, two, button='right')
         pyautogui.click(629, two)
         pyautogui.click(710, two + 38)  # click steam profile
-
         time.sleep(2.5)
         ReleaseKey(0x09)
         pyautogui.click(637, 231, button='right')  # right click
@@ -130,7 +129,7 @@ def lobbied():
         pyautogui.press('esc')  # escape
         time.sleep(0.5)
 
-    pyautogui.click(960, 540, button='right')
+    #pyautogui.click(960, 540, button='right')
 
     def top():
         copy(367)
@@ -146,10 +145,10 @@ def lobbied():
         copy(725)
         copy(755)
 
-    if pyautogui.prompt('top or bottom team?') == 'top':
-        top()
-    else:
+    if pyautogui.prompt('t or ct ?') == 't':
         bottom()
+    else:
+        top()
 
 
 
@@ -220,16 +219,13 @@ def profileSkim():
             res = requests.get(steamURL)
             res.raise_for_status()
             userProfile = bs4.BeautifulSoup(res.text, "html.parser")
-
+            user = userProfile.select('.actual_persona_name')
 
             resFriends = requests.get(steamURL + '/friends')
             userFriends = bs4.BeautifulSoup(resFriends.text, "html.parser")
             elemsFriends = userFriends.select('.friendBlockContent')
 
-            resGames = requests.get(steamURL + '/games/?tab=all')
-            user = userProfile.select('.actual_persona_name')
             name = user[0].getText().strip()
-
 
             def ten():
                 for l in range(10):
@@ -257,16 +253,27 @@ def profileSkim():
         print('error')
 
 def fakeInfo():
-    c('First Name: Jessica, Surname: Saprankieos')
+    firstArray = ['Jessica', 'Sheniqua', 'Jacinta', 'Gerald', 'Martin']
+    surArray = ['Saprinkal', 'Shkrelli', 'Wallace', 'Mehabhiek', 'Cabello']
+    emailArray = ['skuxKidd@transgoths.com', 'skaterG@hi5.com', 'lvl80Wizard@silkroad.com', 'imNotTwelve@raroprimary.school.au', 'tooKewl4u@ministry.gov.au']
+    fatherArray = ['Melania', 'none', 'Emerald', 'Sapphire', 'Ahled']
+    brotherArray = ['Ivanka', 'Tiffany', 'Harold', 'Britney', 'Sashita']
+    sisterArray = ['none', 'Matt', 'Zoey', 'John', 'Marilyn']
+    schoolArray = ['St Francines Girls Boarding School', 'st Hoseas Girls public', 'Inuman Elementary School', 'Governor Dummer Academy', 'West Fukasumi Titnipple High']
+    ipArray = ['223.240.28.128', '250.252.192.199', '216.32.105.204', '162.85.167.53', '151.54.55.126']
+
+
+
+    c('First Name: ' + firstArray[random.randrange(5)] + ', Surname: ' + surArray[random.randrange(5)])
     c('Age: 12, IQ: 2 x Age')
-    c('Email address: Jessica@transgoths.com')
-    c('Mother: non existent')
-    c('Father: Melania')
-    c('Sisters: none')
-    c('Brothers: Ivanka, Tiffany')
+    c('Email address: ' + emailArray[random.randrange(5)])
+    c('Mother: none')
+    c('Father: ' + fatherArray[random.randrange(5)])
+    c('Sisters: ' + sisterArray[random.randrange(5)])
+    c('Brothers: ' + brotherArray[random.randrange(5)])
     c('Residency: 13th floor of anything')
-    c('School: St Francines Girls Boarding School')
-    c('IP addr: 1.2.3.4.5.6.7.8.9.0.abcdefghiv')
+    c('School: ' + schoolArray[random.randrange(5)])
+    c('IP addr: ' + ipArray[random.randrange(5)])
     c('Now as you can see I have your real info')
     c('please pay 5 btc to wwww.go.kl/asdo12 otherwise ')
     c('I will anonymously riddle you until you cry')
@@ -342,10 +349,10 @@ def fakeIPs():
         copy(725)
         copy(755)
 
-    if pyautogui.prompt('top or bottom team?') == 'top':
-        top()
-    else:
+    if pyautogui.prompt('t or ct?') == 't':
         bottom()
+    else:
+        top()
 
 
 
@@ -433,8 +440,117 @@ def metasploit():
 def github():
     c('https://github.com/ClownPrinceCS30/python-automation-and-Java-cipher-program')
 
+def tcp():
+    url = pyperclip.paste()
+    res = requests.get(url)
+    res.raise_for_status()
+    userProfile = bs4.BeautifulSoup(res.text, "html.parser")
+    user = userProfile.select('.actual_persona_name')
+    name = user[0].getText().strip()
+    ipArray = ['252.199.3.79', '219.35.58.144', '126.137.6.118', '185.15.157.25', '180.249.184.44', '235.87.171.91', '217.111.7.191', '237.45.100.205', '227.110.186.127', '234.151.1.17']
+    ip = ipArray[random.randrange(10)]
 
-option = pyautogui.prompt('1: profileSkim, 2: lobbyInfo, 3: fakeInfo, 4: explain webscraper, 5: fakeHacks, 6: fake ipAddr, 7: metasploit, 8: github link')
+    c(name.center(30) + ip)
+    c('import socket')
+    c('import threading')
+    c('bind_ip = ' + '"' + ip + '"')
+    c('bind_port = 5543')
+    c('server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)')
+    c('server.bind((bind_ip, bind_port))')
+    c('server.listen(5)')
+    c('Listening on (' + ip + ', 5543)')
+    c('def handle_client(client_socket):')
+    c('request = client_socket.recv(1024)')
+    c('client_socket.send(ARP_MITM)')
+    c('client_socket.close()')
+    c('client, addr = server.accept()')
+    c('Accepted connection')
+    c('client_handler = threading.Thread(target=handle_client, args=(client,))')
+    c('client_handler.start()')
+
+def mrRobot():
+    c('If you died, would anyone care?')
+    c('Would they really care?')
+    c('Maybe, they\'d cry for a day.')
+    c('But, let\'s be honest, no one would give a shit. They wouldn\'t.')
+    c('The few people that would feel obligated to go to your funeral would')
+    c('probably be annoyed and leave as early as possible.')
+    c('That\'s who you are.')
+    c('That\'s what you are')
+    c('You\'re nothing to anyone. To everyone.')
+
+def shortCheat():
+    c('void Trigger()')
+    c('{')
+    c('DWORD EnemyInCH = Mem.Read<DWORD>(ClientDLL + EntityBase + ((CrossHairID - 1) * EntLoopDist));')
+    c('int EnemyHealth = Mem.Read<int>(EnemyInCH + healthOffset);')
+    c('int EnemyTeam = Mem.Read<int>(EnemyInCH + teamOffset);')
+    c('if (LocalTeam != EnemyTeam && EnemyHealth > 0)')
+    c('{')
+    c('mouse_event(MOUSEEVENTF_LEFTDOWN, NULL, NULL, NULL, NULL);')
+    c('mouse_event(MOUSEEVENTF_LEFTUP, NULL, NULL, NULL, NULL);')
+    c('}')
+
+def longCheat():
+    c('#include "ProcMem.h"')
+    c('ProcMem Mem;')
+    c('Mem.Process("csgo.exe");')
+    c('DWORD ClientDLL = Mem.Module("client.dll");')
+    c('const DWORD playerBase = 0xA68A14;')
+    c('const DWORD entityBase = 0x4A0B0C4;')
+    c('const DWORD crosshairOffset = 0x23F8;')
+    c('const DWORD teamOffset = 0xF0;')
+    c('const DWORD healthOffset = 0xFC;')
+    c('const DWORD EntLoopDist = 0x10;')
+    c('DWORD LocalPlayer = Mem.Read<DWORD>(ClientDLL + PlayerBase);')
+    c('int LocalTeam = Mem.Read<int>(LocalPlayer + teamOffset);')
+    c('int CrossHairID = Mem.Read<int>(LocalPlayer + CrosshairOffset);')
+    c('void Trigger()')
+    c('{')
+    c('DWORD EnemyInCH = Mem.Read<DWORD>(ClientDLL + EntityBase + ((CrossHairID - 1) * EntLoopDist));')
+    c('int EnemyHealth = Mem.Read<int>(EnemyInCH + healthOffset); // Enemy in crosshair\'s')
+    c('int EnemyTeam = Mem.Read<int>(EnemyInCH + teamOffset);')
+    c('if (LocalTeam != EnemyTeam && EnemyHealth > 0)')
+    c('mouse_event(MOUSEEVENTF_LEFTDOWN, NULL, NULL, NULL, NULL);')
+    c('mouse_event(MOUSEEVENTF_LEFTUP, NULL, NULL, NULL, NULL);')
+    c('}')
+    c('int main()')
+    c('{')
+    c('    while(true)')
+    c('    {')
+    c('        Trigger();')
+    c('        Sleep(0.1)')
+    c('    }')
+    c('}')
+
+def wiki():
+    i = 0
+    text = ''
+
+    url = ('https://en.wikipedia.org/wiki/' + pyautogui.prompt('enter keyword'))
+    res = requests.get(url)
+    res.raise_for_status()
+    wikiPage = bs4.BeautifulSoup(res.text, "html.parser")
+    wiki = wikiPage.select('p')
+    para = wiki[0].getText()
+    charArray = list(para)
+    print (para)
+
+    for d in charArray:
+        text += d
+        if d == ' ':
+            i += 1
+
+            if (i == 7):
+                print(text)
+                c(text)
+                i = 0
+                text = ''
+
+    c(text)
+
+
+option = pyautogui.prompt('1: profileSkim, 2: lobbyInfo, 3: fakeInfo, 4: explain webscraper, 5: fakeHacks, 6: fake ipAddr, 7: metasploit, 8: github link, 9: tcp, 10: mrRobot, 11: shortCheat, 12: longCheat, 13: wiki search')
 
 if(option == '1'):
     profileSkim()
@@ -452,5 +568,15 @@ elif (option == '7'):
     metasploit()
 elif (option == '8'):
     github()
+elif (option == '9'):
+    tcp()
+elif (option == '10'):
+    mrRobot()
+elif (option == '11'):
+    shortCheat()
+elif (option == '12'):
+    longCheat()
+elif (option == '13'):
+    wiki()
 else:
     print('nothing chosen')
