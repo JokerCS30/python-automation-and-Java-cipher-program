@@ -1,0 +1,3 @@
+http://www.hacker.org/challenge/chal.php?id=275
+
+Will probably want to run this through my java decipher program and try the rotate all nums then various rotation words
