@@ -7,7 +7,11 @@ makes use of following scripts I'd already written:
   lobbied
   profileSkimming
   fakeInfo
- 
+
+Scripts I'd written seperate became methods in this and I also added alot more new methods to it like the wikipedia searching one.
+
+In total 15 methods in everything.py
+
  modules used in it:
    - time
    - pyperclip
@@ -17,5 +21,8 @@ makes use of following scripts I'd already written:
    - ctypes
    - wintypes
    - shuffle
+   - pyautogui
+   - re
+   - random
    
   
