@@ -277,9 +277,7 @@ def fakeInfo():
     c('Residency: 13th floor of anything')
     c('School: ' + schoolArray[random.randrange(5)])
     c('IP addr: ' + ipArray[random.randrange(5)])
-    c('Now as you can see I have your real info')
     c('please pay 5 btc to wwww.go.kl/asdo12 otherwise ')
-    c('I will anonymously riddle you until you cry')
     c('I will have anonymous ddos you while I wear a hoodie')
     c('I will download programs off the darkweb')
     c('using TOR to steal your worm god skin(f.society)')
@@ -309,12 +307,29 @@ def explain():
     c('https://github.com/ClownPrinceCS30/python-automation-and-Java-cipher-program')
 
 def fakeHacks():
-    c('if steamUser.isSalty():')
-    c('    autoBuy.Negev')
-    c('    hacks(spin, aim, walls).ON')
-    c('    user.stealInventory')
-    c('    user.stealTheirLollies')
-    c('    user.batheInTheirTears')
+    url = ('http://www.' + pyautogui.prompt('http://www.website'))
+    res = requests.get(url)
+    res.raise_for_status()
+    page = bs4.BeautifulSoup(res.text, "html.parser")
+    print(page)
+    pageInfo = page
+    text = ''
+    i = 0
+
+    charArray = list(str(page))
+
+    for d in charArray:
+        text += (d)
+        if(d == ' '):
+            i += 1
+            if(i > 7):
+                print (text)
+                c(text)
+                text = ''
+                i = 0
+    c(text)
+
+
 
 def fakeIPs():
     urlArray = []
@@ -429,7 +444,6 @@ def metasploit():
     c('killing reverse TCP handler on port 8080; no results')
     c('reverse shell initialised use -h for commands')
     c('-->')
-    c('skins = game.Players(inv)')
     c('cd ..')
     c('->')
     c('ls')
@@ -619,7 +633,7 @@ def quotes():
         if(x >= 10):
             break
 
-    chosen = pyautogui.prompt('choose quote: ' + allQuotes)
+    chosen = pyautogui.prompt('choose quote: \n\n' + allQuotes)
     num = int(chosen)
     charArray = list(quote[num].getText().strip())
 
@@ -633,11 +647,81 @@ def quotes():
                 text = ''
     c(text)
 
+def riddles():
+    url = 'https://www.quora.com/What-are-the-best-riddles-by-the-Riddler-Batman'
+    res = requests.get(url)
+    res.raise_for_status()
+    riddlePage = bs4.BeautifulSoup(res.text, "html.parser")
+    riddles = riddlePage.select('.qtext_para')
+    text = ''
+    second = ''
+    divider = range(len(riddles))
+
+    for x in range(len(riddles)):
+        if(x < 16):
+            text += str(x) + ': ' + riddles[x].getText().strip() + '\n\n'
+    second = 'testing'
 
 
-option = pyautogui.prompt('1: profileSkim, 2: lobbyInfo, 3: fakeInfo, 4: explain webscraper, 5: fakeHacks, 6: fake ipAddr, 7: metasploit, 8: github link, 9: tcp, 10: mrRobot, 11: shortCheat, 12: longCheat, 13: wiki search, 14: fastWiki, 15: quotes')
 
-if(option == '1'):
+
+    num = int(pyautogui.prompt(text))
+
+    if(num < 16):
+        c(riddles[num].getText().strip())
+        text = ''
+    elif (num == 16):
+        text = ''
+        for x in range(len(riddles)):
+            if ((x > 15) & (x < 31)):
+                text += str(x) + ': ' + riddles[x].getText().strip() + '\n\n'
+        num = int(pyautogui.prompt(text))
+        if (num < 31):
+            c(riddles[num].getText().strip())
+            text = ''
+        elif(num == 31):
+            text = ''
+            for x in range(len(riddles)):
+                if ((x > 31) & (x < 46)):
+                    text += str(x) + ': ' + riddles[x].getText().strip() + '\n\n'
+            num = int(pyautogui.prompt(text))
+            text = ''
+            if (num < 46):
+                c(riddlePage[num].getText().strip())
+            elif(num == 46):
+                text = ''
+                for x in range(len(riddles)):
+                    if ((x > 45) & (x < 61)):
+                        text += str(x) + ': ' + riddles[x].getText().strip() + '\n\n'
+                num = int(pyautogui.prompt(text))
+                text('')
+                if (num < 61):
+                    c(riddlePage[num].getText().strip())
+
+
+def vpnInfo():
+    c('When you use a virtual private network (VPN), ')
+    c('the DNS request should be directed to an anonymous DNS server ')
+    c('through your VPN, and not directly from your browser')
+    c('this keeps your ISP from monitoring your connection.')
+    c('Unfortunately, sometimes your browser will just ignore')
+    c('that you have a VPN set up and will send the ')
+    c('DNS request straight to your ISP. ')
+    c('That’s called a DNS leak. ')
+    c('This can lead to you think that you’ve stayed anonymous')
+    c('and that you’re safe from online surveillance,')
+    c('but you won’t be protected.')
+    c('www.dnsleaktest.com. , your play')
+
+
+
+optionText = '1:   profileSkim\n2:   lobbyInfo\n3:   fakeInfo\n4:   explain webscraper\n5:   fakeHackerWebsites\n6:   fake ipAddr, '
+optionText += '\n7:   metasploit\n8:   github link\n9:   tcp\n10:   mrRobot\n11:   shortCheat\n12:   longCheat, '
+optionText += '\n13:   wiki search\n14:   fastWiki\n15:   quotes\n16:   riddles\n17: vpnInfo'
+
+option = pyautogui.prompt(optionText)
+
+if (option == '1'):
     profileSkim()
 elif (option == '2'):
     lobbied()
@@ -667,5 +751,9 @@ elif (option == '14'):
     fastWiki()
 elif (option == '15'):
     quotes()
+elif (option == '16'):
+    riddles()
+elif (option == '17'):
+    vpnInfo()
 else:
     print('nothing chosen')
