@@ -90,8 +90,11 @@ def ReleaseKey(hexKeyCode):
                             dwFlags=KEYEVENTF_KEYUP))
     user32.SendInput(1, ctypes.byref(x), ctypes.sizeof(x))
 
-if pyautogui.prompt('all chat or team chat?') == 'all':
+whichKey = pyautogui.prompt('all chat, other, or team chat?')
+if whichKey == 'all':
     chatKey = 0x59
+elif whichKey == 'other':
+    chatKey = 0x0D
 else:
     chatKey = 0x55
 
@@ -100,11 +103,11 @@ def c(writing):
 
     PressKey(chatKey)
     ReleaseKey(chatKey)
-    time.sleep(0.4)
-    pyautogui.typewrite(writing, 0)
+    time.sleep(0.3) # 0.3
+    pyautogui.typewrite(writing, 0) # interval = 0
     PressKey(0x0D)
     ReleaseKey(0x0D)
-    time.sleep(0.3)
+    time.sleep(0.4) # 0.4
 
 
 
@@ -526,8 +529,10 @@ def longCheat():
 def wiki():
     i = 0
     text = ''
+    keyWord = pyautogui.prompt('enter keyword')
+    extra = ''
 
-    url = ('https://en.wikipedia.org/wiki/' + pyautogui.prompt('enter keyword'))
+    url = ('https://en.wikipedia.org/wiki/' + keyWord)
     res = requests.get(url)
     res.raise_for_status()
     wikiPage = bs4.BeautifulSoup(res.text, "html.parser")
@@ -535,6 +540,8 @@ def wiki():
     para = wiki[0].getText()
     charArray = list(para)
     print (para)
+
+    g = 0
 
     for d in charArray:
         text += d
@@ -547,10 +554,88 @@ def wiki():
                 i = 0
                 text = ''
 
+    #if  (text.lower() == keyWord.lower() + ' may refer to:'):
+    if bool(re.search('may refer to',text.lower())):
+        try:
+            for item in wikiPage.find_all('li'):
+                for link in item.find_all('a'):
+                    extra += (link.get('href')) + '\n'
+                g += 1
+                if (g >= 30):
+                    break  # didn't work
+
+            i = 0
+            text = ''
+            keyWord = pyautogui.prompt(extra + 'enter keyword')
+            extra = ''
+
+            url = ('https://en.wikipedia.org/wiki/' + keyWord)
+            res = requests.get(url)
+            res.raise_for_status()
+            wikiPage = bs4.BeautifulSoup(res.text, "html.parser")
+            wiki = wikiPage.select('p')
+            para = wiki[0].getText()
+            charArray = list(para)
+            print(para)
+
+            g = 0
+
+            for d in charArray:
+                text += d
+                if d == ' ':
+                    i += 1
+
+                    if (i == 7):
+                        print(text)
+                        c(text)
+                        i = 0
+                        text = ''
+        except er:
+            pyautogui.alert(er)
+
+    else:
+        c(text)
+
+def fastWiki():
+    c('Welcome to the wikipedia chat bot')
+    while True:
+        c('Request your search:')
+        wiki()
+
+def quotes():
+    url = 'https://www.brainyquote.com/search_results.html?q=' + pyautogui.prompt('enter keyword')
+    res = requests.get(url)
+    res.raise_for_status()
+    quotePage = bs4.BeautifulSoup(res.text, "html.parser")
+    quote = quotePage.select('.bqQuoteLink')
+
+
+    i = 0
+    text = ''
+    allQuotes = ''
+
+    for x in range(len(quote)):
+        allQuotes += str(x) + ': ' + quote[x].getText().strip() + '\n\n'
+        if(x >= 10):
+            break
+
+    chosen = pyautogui.prompt('choose quote: ' + allQuotes)
+    num = int(chosen)
+    charArray = list(quote[num].getText().strip())
+
+    for d in charArray:
+        text += d
+        if d == ' ':
+            i += 1
+            if(i == 6):
+                c(text)
+                i = 0
+                text = ''
     c(text)
 
 
-option = pyautogui.prompt('1: profileSkim, 2: lobbyInfo, 3: fakeInfo, 4: explain webscraper, 5: fakeHacks, 6: fake ipAddr, 7: metasploit, 8: github link, 9: tcp, 10: mrRobot, 11: shortCheat, 12: longCheat, 13: wiki search')
+
+option = pyautogui.prompt('1: profileSkim, 2: lobbyInfo, 3: fakeInfo, 4: explain webscraper, 5: fakeHacks, 6: fake ipAddr, 7: metasploit, 8: github link, 9: tcp, 10: mrRobot, 11: shortCheat, 12: longCheat, 13: wiki search, 14: fastWiki, 15: quotes')
 
 if(option == '1'):
     profileSkim()
@@ -578,5 +663,9 @@ elif (option == '12'):
     longCheat()
 elif (option == '13'):
     wiki()
+elif (option == '14'):
+    fastWiki()
+elif (option == '15'):
+    quotes()
 else:
     print('nothing chosen')
